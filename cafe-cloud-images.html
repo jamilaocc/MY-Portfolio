@@ -3,12 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- حيدي هاد السطر فموقع الزبون الحقيقي باش يبان فـ Google -->
 <meta name="robots" content="noindex">
-<title>كافي كلاود</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<title>كافي</title>
 <style>
   :root { --navy:#16324f; --sky:#cfe3f5; --sun:#f2a65a; --ink:#1b2b3a; --paper:#fafcff; }
   * { box-sizing: border-box; }
-  body { margin:0; font-family:"Segoe UI",Tahoma,Arial,sans-serif; color:var(--ink); background:var(--paper); line-height:1.6; }
+  body { margin:0; font-family:"Amiri","Segoe UI",Tahoma,serif; font-size:1.15rem; color:var(--ink); background:var(--paper); line-height:1.7; }
   header { background:var(--sky); color:var(--navy); padding:56px 20px 60px; text-align:center; }
   header svg { width:110px; display:block; margin:0 auto 8px; }
   header h1 { margin:0; font-size:3rem; }
@@ -28,66 +32,97 @@
   .item b { color:var(--navy); white-space:nowrap; }
   .info { background:var(--sky); border-radius:12px; padding:20px 24px; margin-top:40px; }
   .info p { margin:6px 0; }
+  .info a { color:var(--navy); font-weight:700; }
   footer { text-align:center; padding:24px; font-size:.85rem; color:#6b7c8a; }
 </style>
 </head>
 <body>
 <header>
   <svg viewBox="0 0 80 50" aria-hidden="true"><g fill="#fff"><circle cx="25" cy="32" r="14"/><circle cx="43" cy="22" r="18"/><circle cx="60" cy="32" r="13"/><rect x="25" y="32" width="35" height="14"/></g></svg>
-  <h1>CAFFE CLOUD</h1>
-  <small>CLOUD CAFÉ</small>
-   <p>القهوة التي تحلق بك بعيداً.</p>
+  <h1 id="name"></h1>
+  <small id="latin"></small>
+  <p id="tagline"></p>
   <img id="cover" class="cover" alt="صورة المقهى" hidden>
   <div class="chips" id="chips"></div>
-  <a class="btn" href="https://wa.me/212770144817">احجز طاولة</a>
+  <a class="btn" id="book">احجز طاولة</a>
 </header>
-
 <main>
   <div id="menu"></div>
-  <div class="info">
-    <p><b>أوقات العمل:</b> كل يوم من 8:00 صباحا إلى 11:00 ليلا</p>
-    <p><b>sefrou:</b> [al alia]</p>
-    <p><b>0770144817:</b> [2]</p>
-  </div>
+  <div class="info" id="info"></div>
 </main>
-
-<footer>نموذج موقع من تصميم جميلة</footer>
+<footer id="footer"></footer>
 
 <script>
-  // الخدمات اللي كيقدم المقهى (بدليهم بالخدمات الحقيقية)
-  const SERVICES = ["قهوة وأتاي", "فطور", "واي فاي مجاني", "الطلبات للخارج", "جلسة خارجية"];
-  document.getElementById("chips").innerHTML = SERVICES.map(x => "<span>" + x + "</span>").join("");
-
-  // صورة المقهى: سميها cafe-photo (بلا امتداد) وارفعها، والكود كيلقاها
-  const cover = document.getElementById("cover");
-  const exts = [".jpg", ".jpeg", ".png", ".webp", ".jfif", ".avif", ".jpg.jpg", ".jpg.webp", ".jpg.jfif", ".jpg.avif"];
-  let k = 0;
-  cover.onload = () => { cover.hidden = false; };
-  cover.onerror = () => { k++; if (k < exts.length) cover.src = "cafe-photo" + exts[k]; else cover.remove(); };
-  cover.src = "cafe-photo" + exts[0];
-  // كل مشروب: [السمية، الثمن، سمية الصورة]
-  const MENU = [
+/* ============================================================
+   ✏️  بدلي غير هاد الجزء لكل مقهى. ما تمسيش ما تحت السطر ديال "المحرك".
+   ============================================================ */
+const CONFIG = {
+  name: "كافي كلاود",
+  latin: "CLOUD CAFÉ",
+  tagline: "القهوة التي تحلق بك بعيداً.",
+  whatsapp: "212770144817",            // الرقم بالصيغة الدولية، بلا + وبلا صفر
+  hours: "كل يوم من 8:00 صباحا إلى 11:00 ليلا",
+  address: "[ALALIA]",
+  phone: "[رقم المحل]",
+  map: "",                             // رابط Google Maps (اختياري)
+  footer: "نموذج موقع من تصميم جميلة",
+  colors: { main: "#16324f", soft: "#cfe3f5", accent: "#f2a65a" },
+  services: ["قهوة وأتاي", "فطور", "واي فاي مجاني", "الطلبات للخارج", "جلسة خارجية"],
+  // صورة المقهى: ارفعيها بسمية cafe-photo (بلا امتداد)
+  // المنيو: [السمية، الثمن، سمية الصورة بلا امتداد]
+  menu: [
     { t: "المشروبات الساخنة", i: [
-      ["قهوة سوداء", "10 دراهم", "qahwa-kahla.jpg.jpg"],
-      ["نص نص", "14 درهم", "nos-nos.jpg.jpg"],
-      ["كابتشينو", "20 درهم", "cappuccino.jpg.avif"],
-      ["كلاود لاتيه", "25 درهم", "cloud-latte.jpg.jpg"],
-      ["أتاي بالنعناع", "12 درهم", "atay.jpg.webp"] ] },
+      ["قهوة سوداء", "10 دراهم", "qahwa-kahla"],
+      ["نص نص", "14 درهم", "nos-nos"],
+      ["كابتشينو", "20 درهم", "cappuccino"],
+      ["كلاود لاتيه", "25 درهم", "cloud-latte"],
+      ["أتاي بالنعناع", "12 درهم", "atay"] ] },
     { t: "المشروبات الباردة", i: [
-      ["عصير البرتقال", "15 درهم", "orange.jpg.jpg"],
-      ["آيس لاتيه", "24 درهم", "iced-latte.jpg.jpg"],
-      ["موهيتو", "22 درهم", "mojito.jpg.jfif"] ] },
+      ["عصير البرتقال", "15 درهم", "orange"],
+      ["آيس لاتيه", "24 درهم", "iced-latte"],
+      ["موهيتو", "22 درهم", "mojito"] ] },
     { t: "الحلويات", i: [
-      ["كرواسون", "8 دراهم", "croissant.jpg.jfif"],
-      ["كيك", "18 درهم", "cake.jpg.jfif"],
-      ["بانكيك", "25 درهم", "pancake.jpg.jfif"] ] }
-  ];
-  document.getElementById("menu").innerHTML = MENU.map(s =>
-    "<h2>" + s.t + "</h2>" + s.i.map(([n, p, f]) =>
-      '<div class="item"><div class="thumb"><img src="' + f + '" alt="' + n +
-      '" loading="lazy" onerror="this.remove()"></div><span>' + n + "</span><i></i><b>" + p + "</b></div>"
-    ).join("")
-  ).join("");
+      ["كرواسون", "8 دراهم", "croissant"],
+      ["كيك", "18 درهم", "cake"],
+      ["بانكيك", "25 درهم", "pancake"] ] }
+  ]
+};
+
+/* ============================================================
+   ⚙️  المحرك: ما تمسيهش
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const C = CONFIG, rs = document.documentElement.style;
+rs.setProperty("--navy", C.colors.main);
+rs.setProperty("--sky", C.colors.soft);
+rs.setProperty("--sun", C.colors.accent);
+document.title = C.name;
+$("name").textContent = C.name;
+$("latin").textContent = C.latin;
+$("tagline").textContent = C.tagline;
+$("footer").textContent = C.footer;
+$("book").href = "https://wa.me/" + C.whatsapp;
+$("chips").innerHTML = C.services.map(x => "<span>" + x + "</span>").join("");
+$("info").innerHTML = "<p><b>أوقات العمل:</b> " + C.hours + "</p><p><b>العنوان:</b> " + C.address +
+  "</p><p><b>الهاتف:</b> " + C.phone + "</p>" + (C.map ? '<p><a href="' + C.map + '">الموقع على الخريطة</a></p>' : "");
+
+// كيقلب على الصورة بأي امتداد
+const EXTS = [".jpg", ".jpeg", ".png", ".webp", ".jfif", ".avif", ".jpg.jpg", ".jpg.jpeg", ".jpg.png", ".jpg.webp", ".jpg.jfif", ".jpg.avif"];
+function loadImg(img, base, ok) {
+  let k = 0;
+  img.onload = () => ok && ok();
+  img.onerror = () => { k++; if (k < EXTS.length) img.src = base + EXTS[k]; else img.remove(); };
+  img.src = base + EXTS[0];
+}
+loadImg($("cover"), "cafe-photo", () => { $("cover").hidden = false; });
+
+$("menu").innerHTML = C.menu.map(s =>
+  "<h2>" + s.t + "</h2>" + s.i.map(([n, p, f]) =>
+    '<div class="item"><div class="thumb"><img data-base="' + f + '" alt="' + n + '"></div><span>' +
+    n + "</span><i></i><b>" + p + "</b></div>"
+  ).join("")
+).join("");
+document.querySelectorAll(".thumb img").forEach(im => loadImg(im, im.dataset.base));
 </script>
 </body>
 </html>
