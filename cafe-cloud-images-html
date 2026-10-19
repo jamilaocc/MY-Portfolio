@@ -67,7 +67,7 @@
   ];
   document.getElementById("menu").innerHTML = MENU.map(s =>
     "<h2>" + s.t + "</h2>" + s.i.map(([n, p, f]) =>
-      '<div class="item"><div class="thumb"><img src="images/' + f + '.jpg" alt="' + n +
+      '<div class="item"><div class="thumb"><img src=" + f + '.jpg" alt="' + n +
       '" loading="lazy" onerror="this.remove()"></div><span>' + n + "</span><i></i><b>" + p + "</b></div>"
     ).join("")
   ).join("");
