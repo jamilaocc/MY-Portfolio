@@ -48,26 +48,26 @@
 <footer>نموذج موقع من تصميم جميلة</footer>
 
 <script>
-  // كل مشروب: [السمية، الثمن، سمية الصورة داخل مجلد images]
+  // كل مشروب: [السمية، الثمن، سمية ملف الصورة كاملة]
   const MENU = [
     { t: "المشروبات الساخنة", i: [
-      ["قهوة سوداء", "10 دراهم", "qahwa-kahla"],
-      ["نص نص", "14 درهم", "nos-nos"],
-      ["كابتشينو", "20 درهم", "cappuccino"],
-      ["كلاود لاتيه", "25 درهم", "cloud-latte"],
-      ["أتاي بالنعناع", "12 درهم", "atay"] ] },
+      ["قهوة سوداء", "10 دراهم", "qahwa-kahla.jpg.jpg"],
+      ["نص نص", "14 درهم", "nos-nos.jpg.jpg"],
+      ["كابتشينو", "20 درهم", "cappuccino.jpg.avif"],
+      ["كلاود لاتيه", "25 درهم", "cloud-latte.jpg.jpg"],
+      ["أتاي بالنعناع", "12 درهم", "atay.jpg.webp"] ] },
     { t: "المشروبات الباردة", i: [
-      ["عصير البرتقال", "15 درهم", "orange"],
-      ["آيس لاتيه", "24 درهم", "iced-latte"],
-      ["موهيتو", "22 درهم", "mojito"] ] },
+      ["عصير البرتقال", "15 درهم", "orange.jpg.jpg"],
+      ["آيس لاتيه", "24 درهم", "iced-latte.jpg.jpg"],
+      ["موهيتو", "22 درهم", "mojito.jpg.jfif"] ] },
     { t: "الحلويات", i: [
-      ["كرواسون", "8 دراهم", "croissant"],
-      ["كيك", "18 درهم", "cake"],
-      ["بانكيك", "25 درهم", "pancake"] ] }
+      ["كرواسون", "8 دراهم", "croissant.jpg.jfif"],
+      ["كيك", "18 درهم", "cake.jpg.jfif"],
+      ["بانكيك", "25 درهم", "pancake.jpg.jfif"] ] }
   ];
   document.getElementById("menu").innerHTML = MENU.map(s =>
     "<h2>" + s.t + "</h2>" + s.i.map(([n, p, f]) =>
-      '<div class="item"><div class="thumb"><img src=" + f + '.jpg" alt="' + n +
+      '<div class="item"><div class="thumb"><img src="' + f + '" alt="' + n +
       '" loading="lazy" onerror="this.remove()"></div><span>' + n + "</span><i></i><b>" + p + "</b></div>"
     ).join("")
   ).join("");
