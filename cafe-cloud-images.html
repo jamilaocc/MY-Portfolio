@@ -23,6 +23,9 @@
   .chips { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; max-width:560px; margin:0 auto 24px; }
   .chips span { background:#fff; color:var(--navy); padding:6px 14px; border-radius:999px; font-size:.95rem; font-weight:600; }
   .btn { display:inline-block; background:var(--navy); color:#fff; padding:12px 28px; border-radius:999px; text-decoration:none; font-weight:700; }
+  .actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+  .btn.ghost { background:transparent; color:var(--navy); border:2px solid var(--navy); }
+  .btn[hidden] { display:none; }
   main { max-width:640px; margin:0 auto; padding:16px 20px 48px; }
   h2 { color:var(--navy); font-size:1.5rem; margin:40px 0 12px; padding-right:12px; border-right:5px solid var(--sun); }
   .item { display:flex; align-items:center; gap:12px; padding:8px 0; }
@@ -32,7 +35,6 @@
   .item b { color:var(--navy); white-space:nowrap; }
   .info { background:var(--sky); border-radius:12px; padding:20px 24px; margin-top:40px; }
   .info p { margin:6px 0; }
-  .info a { color:var(--navy); font-weight:700; }
   footer { text-align:center; padding:24px; font-size:.85rem; color:#6b7c8a; }
 </style>
 </head>
@@ -44,7 +46,10 @@
   <p id="tagline"></p>
   <img id="cover" class="cover" alt="صورة المقهى" hidden>
   <div class="chips" id="chips"></div>
-  <a class="btn" id="book">احجز طاولة</a>
+  <div class="actions">
+    <a class="btn" id="book">احجز طاولة</a>
+    <a class="btn ghost" id="mapbtn" hidden>كيفاش توصل</a>
+  </div>
 </header>
 <main>
   <div id="menu"></div>
@@ -64,7 +69,7 @@ const CONFIG = {
   hours: "كل يوم من 8:00 صباحا إلى 11:00 ليلا",
   address: "[العنوان ديال المحل]",
   phone: "[رقم المحل]",
-  map: "",                             // رابط Google Maps (اختياري)
+  map: "",   https://maps.app.goo.gl/9UQYuKRnDMGAPJMx6    // رابط Google Maps: لصقيه بين علامتي التنصيص
   footer: "نموذج موقع من تصميم جميلة",
   colors: { main: "#16324f", soft: "#cfe3f5", accent: "#f2a65a" },
   services: ["قهوة وأتاي", "فطور", "واي فاي مجاني", "الطلبات للخارج", "جلسة خارجية"],
@@ -102,9 +107,10 @@ $("latin").textContent = C.latin;
 $("tagline").textContent = C.tagline;
 $("footer").textContent = C.footer;
 $("book").href = "https://wa.me/" + C.whatsapp;
+if (C.map) { $("mapbtn").href = C.map; $("mapbtn").hidden = false; }
 $("chips").innerHTML = C.services.map(x => "<span>" + x + "</span>").join("");
 $("info").innerHTML = "<p><b>أوقات العمل:</b> " + C.hours + "</p><p><b>العنوان:</b> " + C.address +
-  "</p><p><b>الهاتف:</b> " + C.phone + "</p>" + (C.map ? '<p><a href="' + C.map + '">الموقع على الخريطة</a></p>' : "");
+  "</p><p><b>الهاتف:</b> " + C.phone + "</p>";
 
 // كيقلب على الصورة بأي امتداد
 const EXTS = [".jpg", ".jpeg", ".png", ".webp", ".jfif", ".avif", ".jpg.jpg", ".jpg.jpeg", ".jpg.png", ".jpg.webp", ".jpg.jfif", ".jpg.avif"];
