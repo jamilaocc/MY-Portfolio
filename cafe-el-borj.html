@@ -162,4 +162,781 @@ header p {
   box-shadow: 0 4px 12px rgba(22, 50, 79, .06);
 }
 
-.menu-n
+.menu-nav {
+  display: flex;
+  gap: 8px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.menu-nav a {
+  flex: 0 0 auto;
+  padding: 8px 16px;
+  border: 1px solid var(--navy);
+  border-radius: 999px;
+  color: var(--navy);
+  background: #fff;
+  text-decoration: none;
+  font-size: .95rem;
+  white-space: nowrap;
+}
+
+.menu-nav a:hover,
+.menu-nav a:focus-visible {
+  background: var(--navy);
+  color: #fff;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 4px;
+}
+
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px 20px 48px;
+}
+
+h2 {
+  color: var(--navy);
+  font-size: 1.5rem;
+  margin: 40px 0 16px;
+  padding-inline-start: 12px;
+  border-inline-start: 5px solid var(--sun);
+  scroll-margin-top: calc(var(--nav-height) + 16px);
+}
+
+.items {
+  display: grid;
+  gap: 12px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #e4ebf2;
+  border-radius: 16px;
+}
+
+.thumb {
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--sky);
+}
+
+.thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.price {
+  display: inline-block;
+  color: var(--navy);
+  background: #edf4fa;
+  border-radius: 8px;
+  padding: 2px 10px;
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.photo-note {
+  color: #536777;
+  font-size: .9rem;
+  margin: 20px 0 0;
+}
+
+.info {
+  background: var(--sky);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-top: 40px;
+  overflow-wrap: anywhere;
+}
+
+.info p {
+  margin: 6px 0;
+}
+
+.info a {
+  color: var(--navy);
+}
+
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: .9rem;
+  color: #6b7c8a;
+}
+
+noscript p {
+  text-align: center;
+  padding: 20px;
+}
+
+@media (max-width: 420px) {
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  main {
+    padding-inline: 12px;
+  }
+
+  .item {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .thumb {
+    width: 74px;
+    height: 74px;
+  }
+
+  .item-name {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="lang" id="lang"></div>
+  <h1 id="name"></h1>
+  <small id="latin"></small>
+  <p id="tagline"></p>
+
+  <img id="cover" class="cover" alt="" hidden>
+
+  <div class="chips" id="chips"></div>
+
+  <div class="actions">
+    <a class="btn" id="book"></a>
+    <a class="btn ghost" id="mapbtn" hidden></a>
+  </div>
+
+  <div class="social" id="social"></div>
+</header>
+
+<div class="menu-nav-wrapper" id="menu-nav-wrapper">
+  <nav class="menu-nav" id="menu-nav" aria-label="أقسام المينو"></nav>
+</div>
+
+<main>
+  <noscript>
+    <p>فعّلي JavaScript باش تشوفي المينو / Please enable JavaScript.</p>
+  </noscript>
+
+  <p class="photo-note" id="photo-note" hidden></p>
+  <div id="menu"></div>
+  <div class="info" id="info"></div>
+</main>
+
+<footer id="footer"></footer>
+
+<script>
+/*
+  ترتيب القسم:
+  عربي|Français|English
+
+  ترتيب المنتوج:
+  Français|عربي|English|الثمن|اسم صورة اختياري بلا امتداد
+
+  إلا ما حطيتيش اسم صورة، الكود كيستعمل:
+  menu-01-01 / menu-01-02 / menu-02-01 ...
+
+  حافظي على ترتيب الأقسام والمنتوجات باش تبقى الصور مطابقة.
+*/
+const CONFIG = {
+  name: {
+    ar: "كافي البرج",
+    fr: "Café El Borj",
+    en: "Café El Borj"
+  },
+  latin: "EL BORJ",
+  tagline: {
+    ar: "مقهى ومطعم فصفرو",
+    fr: "Café & restaurant à Sefrou",
+    en: "Café & restaurant in Sefrou"
+  },
+  whatsapp: "212770144817",
+  hours: {
+    ar: "كل يوم من 8:00 صباحا إلى 11:00 ليلا",
+    fr: "Tous les jours de 8h00 à 23h00",
+    en: "Every day, 8:00 AM to 11:00 PM"
+  },
+  address: "la ville, Sefrou",
+  phone: "0770144817",
+  map: "https://maps.app.goo.gl/9UQYuKRnDMGAPJMx6",
+  instagram: "https://www.instagram.com/borj_cafe_restaurant",
+  facebook: "https://www.facebook.com/profile.php?id=61585267962008",
+  footer: {
+    ar: "نموذج موقع من تصميم جميلة",
+    fr: "Modèle de site conçu par Jamila",
+    en: "Website demo by Jamila"
+  },
+  colors: {
+    main: "#16324f",
+    soft: "#cfe3f5",
+    accent: "#f2a65a"
+  },
+
+  /*
+    خلي true إلا استعملتي صور مولدة أو صور ماشي ديال الأطباق الحقيقية.
+    بدليها false غير إلا الصور كلها حقيقية ومطابقة للمنتوجات.
+  */
+  illustrativePhotos: true,
+
+  services: {
+    ar: ["قهوة وأتاي", "فطور", "واي فاي مجاني", "الطلبات للخارج", "جلسة خارجية"],
+    fr: ["Café & thé", "Petit-déjeuner", "Wi-Fi gratuit", "À emporter", "Terrasse"],
+    en: ["Coffee & tea", "Breakfast", "Free Wi-Fi", "Takeaway", "Outdoor seating"]
+  },
+
+  menu: [
+    {
+      t: "الفطور|Petit-déjeuner|Breakfast",
+      i: [
+        "Petit-Déjeuner Fassi|فطور فاسي|Fassi Breakfast|38",
+        "Petit-Déjeuner Sefrioui|فطور صفريوي|Sefrioui Breakfast|33",
+        "Petit-Déjeuner Croque Madame|فطور كروك مدام|Croque Madame Breakfast|45",
+        "Petit-Déjeuner Français|فطور فرنسي|French Breakfast|38",
+        "Petit-Déjeuner El Borj|فطور البرج|El Borj Breakfast|48",
+        "Petit-Déjeuner Omelette|فطور أومليت|Omelette Breakfast|30",
+        "Petit-Déjeuner Omelette Fromage|فطور أومليت بالجبن|Cheese Omelette Breakfast|33",
+        "Petit-Déjeuner Chamal|فطور شمال|Chamal Breakfast|40"
+      ]
+    },
+    {
+      t: "الأكثر طلبا|Tendance|Trending",
+      i: [
+        "Double Chocolat et Oreo|دوبل شوكولا وأوريو|Double Chocolate & Oreo|32",
+        "Mixed Berries|ميكسد بيريز||32",
+        "Bubble Gum|بابل غوم||32",
+        "Gourmand|غورمان||32"
+      ]
+    },
+    {
+      t: "ميلك شيك|Milkshakes|Milkshakes",
+      i: [
+        "Chocolat|شوكولا|Chocolate|28",
+        "Vanille|فانيليا|Vanilla|28",
+        "Oreo|أوريو||28"
+      ]
+    },
+    {
+      t: "موهيتو|Mojitos|Mojitos",
+      i: [
+        "Mojito à la menthe|موهيتو بالنعناع|Mint Mojito|20",
+        "Mojito Mangue|موهيتو مانجو|Mango Mojito|22",
+        "Mojito Fraise|موهيتو فراولة|Strawberry Mojito|22",
+        "Mojito Bleu|موهيتو أزرق|Blue Mojito|22",
+        "Mojito Amazon|موهيتو أمازون|Amazon Mojito|25"
+      ]
+    },
+    {
+      t: "كوكتيل|Cocktails|Cocktails",
+      i: [
+        "Virgin Pinacolada|فيرجن بينا كولادا|Virgin Piña Colada|25",
+        "Bleu Hawaiian|بلو هاواي|Blue Hawaiian|22",
+        "Pink Pinacolada|بينك بينا كولادا|Pink Piña Colada|30",
+        "Bora Bora|بورا بورا||27",
+        "Margarita|مارغريتا||28",
+        "Bleu Red Bull|بلو ريد بول|Blue Red Bull|30"
+      ]
+    },
+    {
+      t: "بابل تي|Thé Bubble|Bubble Tea",
+      i: [
+        "Mangue|مانجو|Mango|22",
+        "Fraise|فراولة|Strawberry|22",
+        "Blueberry|توت أزرق||22",
+        "Ananas|أناناس|Pineapple|22"
+      ]
+    },
+    {
+      t: "فرابوتشينو|Frappuccino|Frappuccino",
+      i: [
+        "Fraise|فراولة|Strawberry|22",
+        "Caramel|كراميل||23",
+        "Chocolat|شوكولا|Chocolate|23",
+        "Oreo|أوريو||23",
+        "Vanille|فانيليا|Vanilla|23"
+      ]
+    },
+    {
+      t: "سموذي|Smoothies|Smoothies",
+      i: [
+        "Crown Peche|كراون خوخ|Crown Peach|24",
+        "Sangria Jungle|سانغريا جانغل||24",
+        "Mango|مانجو||24",
+        "Candy Jungle|كاندي جانغل||24",
+        "Tropical Paradise|تروبيكال باراديس||24",
+        "Mixed Berries|ميكسد بيريز||24",
+        "Crown Appel|كراون أبل||24"
+      ]
+    },
+    {
+      t: "بانكيك|Pancakes|Pancakes",
+      i: [
+        "Pancakes nature|بانكيك سادة|Plain pancakes|14",
+        "Pancakes nutella|بانكيك نوتيلا|Nutella pancakes|24",
+        "Pancakes caramel et amande|بانكيك كراميل ولوز|Caramel & almond pancakes|28",
+        "Pancakes miel et noix|بانكيك عسل وجوز|Honey & walnut pancakes|30"
+      ]
+    },
+    {
+      t: "بانيني|Panini|Panini",
+      i: [
+        "Panini dinde|بانيني ديك رومي|Turkey panini|25",
+        "Panini viande hachée|بانيني لحم مفروم|Minced meat panini|28",
+        "Panini charcuterie|بانيني لحوم باردة|Deli meats panini|25",
+        "Panini mixte|بانيني مشكل|Mixed panini|30",
+        "Panini 4 fromages|بانيني 4 أجبان|4-cheese panini|25",
+        "Panini thon|بانيني تونة|Tuna panini|25",
+        "Panini fruits de mer|بانيني مأكولات بحرية|Seafood panini|38",
+        "Panini Borj|بانيني البرج|Borj panini|35"
+      ]
+    },
+    {
+      t: "برغر|Burgers|Burgers",
+      i: [
+        "Burger simple|برغر عادي|Classic burger|22",
+        "Cheese burger|تشيز برغر|Cheeseburger|26",
+        "Egg burger|برغر بالبيض||30",
+        "Big burger|بيغ برغر||35",
+        "Chicken burger|تشيكن برغر||26",
+        "Big chicken|بيغ تشيكن||35",
+        "Burger Borj|برغر البرج|Borj burger|38"
+      ]
+    },
+    {
+      t: "وجبة الأطفال|Menu enfants|Kids menu",
+      i: [
+        "Chicken burger + jus + surprise|تشيكن برغر + عصير + مفاجأة|Chicken burger + juice + surprise|38",
+        "Burger simple + jus + surprise|برغر عادي + عصير + مفاجأة|Classic burger + juice + surprise|38",
+        "Nuggets + jus + surprise|ناغتس + عصير + مفاجأة|Nuggets + juice + surprise|38"
+      ]
+    },
+    {
+      t: "المعجنات|Les pâtes|Pasta",
+      i: [
+        "Lasagne bolognaise|لازانيا بولونيز|Bolognese lasagna|38",
+        "Lasagne fruits de mer|لازانيا مأكولات بحرية|Seafood lasagna|50",
+        "Pastichio fumé|باستيتشيو مدخن|Smoked pastichio|32",
+        "Pastichio poulet|باستيتشيو دجاج|Chicken pastichio|38",
+        "Pastichio bolognaise|باستيتشيو بولونيز|Bolognese pastichio|38",
+        "Pastichio mixte|باستيتشيو مشكل|Mixed pastichio|42",
+        "Supplément sauce|إضافة صلصة|Extra sauce|2"
+      ]
+    },
+    {
+      t: "سلطات|Salades|Salads",
+      i: [
+        "Salade niçoise|سلطة نيسواز|Niçoise salad|25",
+        "Salade Borj|سلطة البرج|Borj salad|38",
+        "Salade pescador|سلطة بيسكادور|Pescador salad|47",
+        "Salade spéciale|سلطة سبيسيال|Special salad|58",
+        "Salade familiale|سلطة عائلية|Family salad|80"
+      ]
+    },
+    {
+      t: "تاكوس (غراتيني: +5 درهم)|Tacos (gratiné : +5 DH)|Tacos (gratin: +5 DH)",
+      i: [
+        "Tacos dinde|تاكوس ديك رومي|Turkey tacos|35",
+        "Tacos viande hachée|تاكوس لحم مفروم|Minced meat tacos|37",
+        "Tacos chawarma|تاكوس شاورما|Shawarma tacos|37",
+        "Tacos nuggets|تاكوس ناغتس|Nuggets tacos|38",
+        "Tacos mixte|تاكوس مشكل|Mixed tacos|40",
+        "Tacos Borj|تاكوس البرج|Borj tacos|40",
+        "Tacos cordon-bleu|تاكوس كوردون بلو|Cordon bleu tacos|42",
+        "Tacos fruits de mer|تاكوس مأكولات بحرية|Seafood tacos|50",
+        "Nuggets 10 pièces|ناغتس 10 قطع|Nuggets (10 pieces)|30",
+        "Plat de frites|طبق بطاطس مقلية|Plate of fries|12"
+      ]
+    },
+    {
+      t: "ساندويتش رويال|Sandwich Royal|Royal Sandwich",
+      i: [
+        "Royal dinde Crespi|رويال ديك رومي كريسبي|Royal crispy turkey|38",
+        "Royal viande hachée|رويال لحم مفروم|Royal minced meat|35",
+        "Royal mixte|رويال مشكل|Royal mixed|42",
+        "Royal cordon-bleu|رويال كوردون بلو|Royal cordon bleu|40"
+      ]
+    },
+    {
+      t: "بيتزا (صغيرة / كبيرة)|Pizza (P / G)|Pizza (S / L)",
+      i: [
+        "Pizza fruits de mer|بيتزا مأكولات بحرية|Seafood pizza|48 / 60",
+        "Pizza dinde|بيتزا ديك رومي|Turkey pizza|35 / 60",
+        "Pizza viande hachée|بيتزا لحم مفروم|Minced meat pizza|37 / 60",
+        "Pizza hawaïenne|بيتزا هاواي|Hawaiian pizza|38 / 60",
+        "Pizza 4 saisons|بيتزا 4 فصول|4 Seasons pizza|40 / 60",
+        "Pizza 4 fromages|بيتزا 4 أجبان|4 Cheese pizza|30 / 50",
+        "Pizza margarita|بيتزا مارغريتا|Margherita pizza|28 / 48",
+        "Pizza charcuterie|بيتزا لحوم باردة|Deli meats pizza|35 / 57",
+        "Pizza végétarienne|بيتزا نباتية|Vegetarian pizza|34 / 53",
+        "Pizza thon|بيتزا تونة|Tuna pizza|34 / 53",
+        "Pizza Borj|بيتزا البرج|Borj pizza|40 / 60",
+        "Pizza au choix|بيتزا حسب الاختيار|Pizza of your choice|42 / 60"
+      ]
+    },
+    {
+      t: "كسكس (كل جمعة)|Couscous (chaque vendredi)|Couscous (every Friday)",
+      i: [
+        "Couscous poulet|كسكس دجاج|Chicken couscous|35",
+        "Couscous viande|كسكس لحم|Meat couscous|42"
+      ]
+    },
+    {
+      t: "حلويات|Desserts|Desserts",
+      i: [
+        "Tiramisu oreo|تيراميسو أوريو|Oreo tiramisu|20",
+        "Tiramisu KitKat|تيراميسو كيت كات|KitKat tiramisu|20",
+        "Pana cotta|بانا كوتا|Panna cotta|15"
+      ]
+    }
+  ]
+};
+
+/* المحرك */
+const UI = {
+  ar: {
+    book: "احجز طاولة",
+    map: "كيفاش توصل",
+    hours: "أوقات العمل",
+    address: "العنوان",
+    phone: "الهاتف",
+    dh: "درهم",
+    categories: "أقسام المينو",
+    cover: "صورة مقهى البرج",
+    photoNote: "الصور توضيحية وقد تختلف عن التقديم الفعلي."
+  },
+  fr: {
+    book: "Réserver une table",
+    map: "Itinéraire",
+    hours: "Horaires",
+    address: "Adresse",
+    phone: "Téléphone",
+    dh: "DH",
+    categories: "Catégories du menu",
+    cover: "Photo du Café El Borj",
+    photoNote: "Photos illustratives : la présentation réelle peut varier."
+  },
+  en: {
+    book: "Book a table",
+    map: "Get directions",
+    hours: "Opening hours",
+    address: "Address",
+    phone: "Phone",
+    dh: "DH",
+    categories: "Menu categories",
+    cover: "Photo of Café El Borj",
+    photoNote: "Illustrative images; actual presentation may vary."
+  }
+};
+
+const $ = id => document.getElementById(id);
+const C = CONFIG;
+const rootStyle = document.documentElement.style;
+
+let LANG = "ar";
+let renderVersion = 0;
+
+try {
+  const savedLanguage = localStorage.getItem("el-borj-language");
+  if (Object.prototype.hasOwnProperty.call(UI, savedLanguage)) {
+    LANG = savedLanguage;
+  }
+} catch {}
+
+rootStyle.setProperty("--navy", C.colors.main);
+rootStyle.setProperty("--sky", C.colors.soft);
+rootStyle.setProperty("--sun", C.colors.accent);
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+function pad(number) {
+  return String(number).padStart(2, "0");
+}
+
+function imageBase(sectionIndex, itemIndex) {
+  return `menu-${pad(sectionIndex + 1)}-${pad(itemIndex + 1)}`;
+}
+
+function sectionTitle(section) {
+  const [ar, fr, en] = section.t.split("|");
+  return {
+    ar: ar || fr,
+    fr,
+    en: en || fr
+  }[LANG];
+}
+
+function updateNavHeight() {
+  const height = $("menu-nav-wrapper").getBoundingClientRect().height;
+  rootStyle.setProperty("--nav-height", `${height}px`);
+}
+
+/*
+  صور المينو: jpg / webp / png / jpeg
+  صورة الغلاف: نفس الامتدادات القديمة كذلك
+*/
+const MENU_EXTS = [".jpg", ".webp", ".png", ".jpeg"];
+const COVER_EXTS = [
+  ".jpg", ".jpeg", ".png", ".webp", ".jfif", ".avif",
+  ".jpg.jpg", ".jpg.jpeg", ".jpg.png", ".jpg.webp",
+  ".jpg.jfif", ".jpg.avif"
+];
+
+function loadImage(img, base, extensions, onSuccess) {
+  let index = 0;
+
+  img.onload = () => {
+    img.hidden = false;
+    const container = img.closest(".thumb");
+    if (container) container.hidden = false;
+    if (onSuccess) onSuccess();
+  };
+
+  img.onerror = () => {
+    index++;
+
+    if (index < extensions.length) {
+      img.src = base + extensions[index];
+      return;
+    }
+
+    img.onload = null;
+    img.onerror = null;
+    img.removeAttribute("src");
+    img.hidden = true;
+
+    const container = img.closest(".thumb");
+    if (container) container.hidden = true;
+  };
+
+  img.src = base + extensions[index];
+}
+
+$("latin").textContent = C.latin;
+$("book").href = "https://wa.me/" + C.whatsapp;
+
+if (C.map) {
+  $("mapbtn").href = C.map;
+  $("mapbtn").hidden = false;
+}
+
+$("social").innerHTML = [
+  ["Instagram", C.instagram],
+  ["Facebook", C.facebook]
+]
+  .filter(([, url]) => url)
+  .map(([name, url]) => `
+    <a href="${escapeHTML(url)}"
+       target="_blank"
+       rel="noopener noreferrer">
+      ${escapeHTML(name)}
+    </a>
+  `)
+  .join("");
+
+$("lang").innerHTML = [
+  ["ar", "العربية"],
+  ["fr", "Français"],
+  ["en", "English"]
+]
+  .map(([language, label]) => `
+    <button type="button"
+            data-l="${language}"
+            lang="${language}"
+            aria-pressed="false">
+      ${label}
+    </button>
+  `)
+  .join("");
+
+$("lang").addEventListener("click", event => {
+  const button = event.target.closest("button[data-l]");
+  if (!button) return;
+
+  LANG = button.dataset.l;
+
+  try {
+    localStorage.setItem("el-borj-language", LANG);
+  } catch {}
+
+  render();
+});
+
+loadImage($("cover"), "cafe-photo", COVER_EXTS);
+
+function render() {
+  const version = ++renderVersion;
+  const U = UI[LANG];
+
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
+  document.title = C.name[LANG];
+
+  $("name").textContent = C.name[LANG];
+  $("tagline").textContent = C.tagline[LANG];
+  $("footer").textContent = C.footer[LANG];
+  $("book").textContent = U.book;
+  $("mapbtn").textContent = U.map;
+  $("cover").alt = U.cover;
+
+  $("photo-note").textContent = U.photoNote;
+  $("photo-note").hidden = true;
+
+  $("chips").innerHTML = C.services[LANG]
+    .map(service => `<span>${escapeHTML(service)}</span>`)
+    .join("");
+
+  const phoneHref = String(C.phone).replace(/[^\d+]/g, "");
+
+  $("info").innerHTML = `
+    <p>
+      <b>${escapeHTML(U.hours)}:</b>
+      ${escapeHTML(C.hours[LANG])}
+    </p>
+    <p>
+      <b>${escapeHTML(U.address)}:</b>
+      ${escapeHTML(C.address)}
+    </p>
+    <p>
+      <b>${escapeHTML(U.phone)}:</b>
+      <a href="tel:${escapeHTML(phoneHref)}">
+        <bdi dir="ltr">${escapeHTML(C.phone)}</bdi>
+      </a>
+    </p>
+  `;
+
+  document.querySelectorAll("#lang button").forEach(button => {
+    const selected = button.dataset.l === LANG;
+    button.classList.toggle("on", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+
+  $("menu-nav").setAttribute("aria-label", U.categories);
+
+  $("menu-nav").innerHTML = C.menu
+    .map((section, sectionIndex) => `
+      <a href="#category-${sectionIndex}">
+        ${escapeHTML(sectionTitle(section))}
+      </a>
+    `)
+    .join("");
+
+  $("menu").innerHTML = C.menu
+    .map((section, sectionIndex) => {
+      const items = section.i.map((row, itemIndex) => {
+        const [fr, ar, en, price, customImage] = row.split("|");
+
+        const name = {
+          fr,
+          ar: ar || fr,
+          en: en || fr
+        }[LANG];
+
+        const base = customImage ||
+          imageBase(sectionIndex, itemIndex);
+
+        return `
+          <article class="item">
+            <div class="thumb" hidden>
+              <img
+                data-base="${escapeHTML(base)}"
+                alt="${escapeHTML(name)}"
+                decoding="async"
+                width="92"
+                height="92">
+            </div>
+
+            <div class="item-content">
+              <h3 class="item-name">${escapeHTML(name)}</h3>
+              <span class="price">
+                <bdi dir="ltr">${escapeHTML(price)}</bdi>
+                ${escapeHTML(U.dh)}
+              </span>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      return `
+        <section aria-labelledby="category-${sectionIndex}">
+          <h2 id="category-${sectionIndex}">
+            ${escapeHTML(sectionTitle(section))}
+          </h2>
+          <div class="items">${items}</div>
+        </section>
+      `;
+    })
+    .join("");
+
+  document.querySelectorAll(".thumb img").forEach(img => {
+    loadImage(img, img.dataset.base, MENU_EXTS, () => {
+      if (version === renderVersion && C.illustrativePhotos) {
+        $("photo-note").hidden = false;
+      }
+    });
+  });
+
+  requestAnimationFrame(updateNavHeight);
+}
+
+window.addEventListener("resize", updateNavHeight);
+
+if ("ResizeObserver" in window) {
+  const navObserver = new ResizeObserver(updateNavHeight);
+  navObserver.observe($("menu-nav-wrapper"));
+}
+
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(updateNavHeight);
+}
+
+render();
+</script>
+</body>
+</html>
