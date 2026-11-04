@@ -1,715 +1,315 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#173b32">
-  <title>Café El Borj | مقهى البرج</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root {
-      --green: #173b32;
-      --gold: #d4ad63;
-      --background: #f7f4ed;
-      --text: #23352f;
-      --muted: #737b75;
-    }
-
-    body {
-      margin: 0;
-      background: var(--background);
-      color: var(--text);
-      font-family: Tahoma, Arial, sans-serif;
-      line-height: 1.7;
-    }
-
-    header {
-      padding: 42px 18px 30px;
-      text-align: center;
-      background: var(--green);
-      color: white;
-    }
-
-    .logo {
-      display: inline-grid;
-      place-items: center;
-      width: 70px;
-      height: 70px;
-      margin-bottom: 10px;
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      font-size: 34px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(27px, 6vw, 42px);
-    }
-
-    header p {
-      margin: 7px 0 0;
-      color: #e5d4b3;
-    }
-
-    .tools {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 13px 0;
-      background: #f7f4ed;
-      border-bottom: 1px solid #deded2;
-    }
-
-    .container {
-      width: min(1100px, 92%);
-      margin-inline: auto;
-    }
-
-    #search {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1px solid #d8dacd;
-      border-radius: 12px;
-      background: white;
-      color: var(--text);
-      font: inherit;
-    }
-
-    #search:focus {
-      outline: 2px solid var(--gold);
-      outline-offset: 2px;
-    }
-
-    nav {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 12px 2px 3px;
-    }
-
-    nav button {
-      flex-shrink: 0;
-      padding: 9px 16px;
-      border: 1px solid #d8dacd;
-      border-radius: 24px;
-      background: white;
-      color: var(--green);
-      cursor: pointer;
-      font: inherit;
-      font-size: 14px;
-    }
-
-    nav button.active {
-      background: var(--green);
-      border-color: var(--green);
-      color: white;
-    }
-
-    main {
-      min-height: 45vh;
-      padding-block: 22px 45px;
-    }
-
-    .section-title {
-      margin: 14px 0 18px;
-      padding-right: 12px;
-      border-right: 4px solid var(--gold);
-      font-size: 24px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 18px;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      overflow: hidden;
-      border: 1px solid #e6e5dc;
-      border-radius: 16px;
-      background: white;
-      box-shadow: 0 4px 15px #173b3208;
-    }
-
-    .photo {
-      display: grid;
-      place-items: center;
-      height: 185px;
-      overflow: hidden;
-      background: #ebe8dd;
-      font-size: 58px;
-    }
-
-    .photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .card-body {
-      padding: 16px;
-    }
-
-    .card h3 {
-      margin: 0;
-      font-size: 18px;
-    }
-
-    .french {
-      margin: 4px 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .price {
-      margin: 10px 0 0;
-      color: var(--green);
-      font-weight: bold;
-    }
-
-    .empty {
-      padding: 35px 15px;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    footer {
-      padding: 22px;
-      text-align: center;
-      background: var(--green);
-      color: #e5d4b3;
-    }
-
-    @media (max-width: 520px) {
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .photo {
-        height: 135px;
-      }
-
-      .card-body {
-        padding: 12px;
-      }
-
-      .card h3 {
-        font-size: 16px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- حيدي هاد السطر فموقع الزبون الحقيقي باش يبان فـ Google -->
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<title>EL BORJ</title>
+<style>
+  :root { --navy:#16324f; --sky:#cfe3f5; --sun:#f2a65a; --ink:#1b2b3a; --paper:#fafcff; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:"Amiri","Segoe UI",Tahoma,serif; font-size:1.15rem; color:var(--ink); background:var(--paper); line-height:1.7; }
+  header { background:var(--sky); color:var(--navy); padding:32px 20px 60px; text-align:center; }
+  header h1 { margin:0; font-size:3rem; }
+  header small { display:block; letter-spacing:3px; }
+  header p { margin:14px auto 26px; max-width:30ch; font-size:1.15rem; }
+  .lang { display:flex; justify-content:center; gap:8px; margin-bottom:28px; }
+  .lang button { font:inherit; font-size:.95rem; border:2px solid var(--navy); background:transparent; color:var(--navy); padding:4px 14px; border-radius:999px; cursor:pointer; }
+  .lang button.on { background:var(--navy); color:#fff; }
+  .cover { display:block; width:100%; max-width:560px; height:220px; object-fit:cover; border-radius:16px; margin:0 auto 20px; }
+  .cover[hidden] { display:none; }
+  .chips { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; max-width:560px; margin:0 auto 24px; }
+  .chips span { background:#fff; color:var(--navy); padding:6px 14px; border-radius:999px; font-size:.95rem; font-weight:600; }
+  .btn { display:inline-block; background:var(--navy); color:#fff; padding:12px 28px; border-radius:999px; text-decoration:none; font-weight:700; }
+  .actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+  .btn.ghost { background:transparent; color:var(--navy); border:2px solid var(--navy); }
+  .btn[hidden] { display:none; }
+  .social { display:flex; justify-content:center; gap:20px; margin-top:20px; }
+  .social a { color:var(--navy); font-weight:700; text-decoration:underline; text-underline-offset:5px; }
+  html { scroll-behavior:smooth; }
+  .nav { position:sticky; top:0; z-index:5; display:flex; gap:8px; overflow-x:auto; padding:10px 16px; background:var(--paper); border-bottom:1px solid #d6e2ee; }
+  .nav a { flex:none; color:var(--navy); text-decoration:none; font-weight:700; font-size:.95rem; padding:4px 14px; border:2px solid var(--navy); border-radius:999px; white-space:nowrap; }
+  section { scroll-margin-top:64px; }
+  main { max-width:640px; margin:0 auto; padding:16px 20px 48px; }
+  h2 { color:var(--navy); font-size:1.5rem; margin:40px 0 12px; padding-inline-start:12px; border-inline-start:5px solid var(--sun); }
+  .sec { display:block; width:100%; max-width:280px; height:170px; object-fit:cover; border-radius:14px; margin:0 0 8px; }
+  .item { display:flex; align-items:center; gap:12px; padding:8px 0; }
+  .thumb { width:64px; height:64px; flex:none; border-radius:12px; background:var(--sky); overflow:hidden; }
+  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .item i { flex:1; border-bottom:2px dotted #b4c6d8; }
+  .item b { color:var(--navy); white-space:nowrap; }
+  .info { background:var(--sky); border-radius:12px; padding:20px 24px; margin-top:40px; }
+  .info p { margin:6px 0; }
+  footer { text-align:center; padding:24px; font-size:.85rem; color:#6b7c8a; }
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="logo" aria-hidden="true">☕</div>
-    <h1>مقهى البرج</h1>
-    <p lang="fr">Café El Borj — Menu</p>
-  </header>
-
-  <div class="tools">
-    <div class="container">
-      <input
-        id="search"
-        type="search"
-        placeholder="قلّب على شي حاجة… / Rechercher"
-        aria-label="البحث في المينو"
-      >
-      <nav id="categories" aria-label="أقسام المينو"></nav>
-    </div>
+<header>
+  <div class="lang" id="lang"></div>
+  <h1 id="name"></h1>
+  <small id="latin"></small>
+  <p id="tagline"></p>
+  <img id="cover" class="cover" alt="" hidden>
+  <div class="chips" id="chips"></div>
+  <div class="actions">
+    <a class="btn" id="book"></a>
+    <a class="btn ghost" id="mapbtn" hidden></a>
   </div>
+  <div class="social" id="social"></div>
+</header>
+<nav class="nav" id="menu-nav"></nav>
+<main>
+  <div id="menu"></div>
+  <div class="info" id="info"></div>
+</main>
+<footer id="footer"></footer>
 
-  <main id="menu" class="container"></main>
+<script>
+/* ============================================================
+   ✏️  بدلي غير هاد الجزء لكل مقهى. ما تمسيش ما تحت السطر ديال "المحرك".
+   كل منتوج: "French|عربي|English|الثمن|سمية الصورة (اختياري)"
+   إلا خليتي العربي ولا الإنجليزي خاوي، كيتعمر بالفرنسي.
+   ============================================================ */
+const CONFIG = {
+  name: { ar: "كافي البرج", fr: "Café El Borj", en: "Café El Borj" },
+  latin: "EL BORJ",
+  tagline: { ar: "مقهى ومطعم فصفرو", fr: "Café & restaurant à Sefrou", en: "Café & restaurant in Sefrou" },
+  whatsapp: "212770144817",            // الرقم بالصيغة الدولية، بلا + وبلا صفر
+  hours: { ar: "كل يوم من 8:00 صباحا إلى 11:00 ليلا", fr: "Tous les jours de 8h00 à 23h00", en: "Every day, 8:00 AM to 11:00 PM" },
+  address: "la ville, Sefrou",
+  phone: "0770144817",
+  map: "https://maps.app.goo.gl/9UQYuKRnDMGAPJMx6",
+  instagram: "https://www.instagram.com/borj_cafe_restaurant",
+  facebook: "https://www.facebook.com/profile.php?id=61585267962008",
+  footer: { ar: "نموذج موقع من تصميم جميلة", fr: "Modèle de site conçu par Jamila", en: "Website demo by Jamila" },
+  colors: { main: "#16324f", soft: "#cfe3f5", accent: "#f2a65a" },
+  services: {
+    ar: ["قهوة وأتاي", "فطور", "واي فاي مجاني", "الطلبات للخارج", "جلسة خارجية"],
+    fr: ["Café & thé", "Petit-déjeuner", "Wi-Fi gratuit", "À emporter", "Terrasse"],
+    en: ["Coffee & tea", "Breakfast", "Free Wi-Fi", "Takeaway", "Outdoor seating"]
+  },
+  menu: [
+    { t: "الفطور|Petit-déjeuner|Breakfast", i: [
+      "Petit-Déjeuner Fassi|فطور فاسي|Fassi Breakfast|38",
+      "Petit-Déjeuner Sefrioui|فطور صفريوي|Sefrioui Breakfast|33",
+      "Petit-Déjeuner Croque Madame|فطور كروك مدام|Croque Madame Breakfast|45",
+      "Petit-Déjeuner Français|فطور فرنسي|French Breakfast|38",
+      "Petit-Déjeuner El Borj|فطور البرج|El Borj Breakfast|48",
+      "Petit-Déjeuner Omelette|فطور أومليت|Omelette Breakfast|30",
+      "Petit-Déjeuner Omelette Fromage|فطور أومليت بالجبن|Cheese Omelette Breakfast|33",
+      "Petit-Déjeuner Chamal|فطور شمال|Chamal Breakfast|40" ] },
+    { t: "الأكثر طلبا|Tendance|Trending", i: [
+      "Double Chocolat et Oreo|دوبل شوكولا وأوريو|Double Chocolate & Oreo|32",
+      "Mixed Berries|ميكسد بيريز||32",
+      "Bubble Gum|بابل غوم||32",
+      "Gourmand|غورمان||32" ] },
+    { t: "ميلك شيك|Milkshakes|Milkshakes", i: [
+      "Chocolat|شوكولا|Chocolate|28",
+      "Vanille|فانيليا|Vanilla|28",
+      "Oreo|أوريو||28" ] },
+    { t: "موهيتو|Mojitos|Mojitos", i: [
+      "Mojito à la menthe|موهيتو بالنعناع|Mint Mojito|20",
+      "Mojito Mangue|موهيتو مانجو|Mango Mojito|22",
+      "Mojito Fraise|موهيتو فراولة|Strawberry Mojito|22",
+      "Mojito Bleu|موهيتو أزرق|Blue Mojito|22",
+      "Mojito Amazon|موهيتو أمازون|Amazon Mojito|25" ] },
+    { t: "كوكتيل|Cocktails|Cocktails", i: [
+      "Virgin Pinacolada|فيرجن بينا كولادا|Virgin Piña Colada|25",
+      "Bleu Hawaiian|بلو هاواي|Blue Hawaiian|22",
+      "Pink Pinacolada|بينك بينا كولادا|Pink Piña Colada|30",
+      "Bora Bora|بورا بورا||27",
+      "Margarita|مارغريتا||28",
+      "Bleu Red Bull|بلو ريد بول|Blue Red Bull|30" ] },
+    { t: "بابل تي|Thé Bubble|Bubble Tea", i: [
+      "Mangue|مانجو|Mango|22",
+      "Fraise|فراولة|Strawberry|22",
+      "Blueberry|توت أزرق||22",
+      "Ananas|أناناس|Pineapple|22" ] },
+    { t: "فرابوتشينو|Frappuccino|Frappuccino", i: [
+      "Fraise|فراولة|Strawberry|22",
+      "Caramel|كراميل||23",
+      "Chocolat|شوكولا|Chocolate|23",
+      "Oreo|أوريو||23",
+      "Vanille|فانيليا|Vanilla|23" ] },
+    { t: "سموذي|Smoothies|Smoothies", i: [
+      "Crown Peche|كراون خوخ|Crown Peach|24",
+      "Sangria Jungle|سانغريا جانغل||24",
+      "Mango|مانجو||24",
+      "Candy Jungle|كاندي جانغل||24",
+      "Tropical Paradise|تروبيكال باراديس||24",
+      "Mixed Berries|ميكسد بيريز||24",
+      "Crown Appel|كراون أبل||24" ] },
+    { t: "بانكيك|Pancakes|Pancakes", i: [
+      "Pancakes nature|بانكيك سادة|Plain pancakes|14",
+      "Pancakes nutella|بانكيك نوتيلا|Nutella pancakes|24",
+      "Pancakes caramel et amande|بانكيك كراميل ولوز|Caramel & almond pancakes|28",
+      "Pancakes miel et noix|بانكيك عسل وجوز|Honey & walnut pancakes|30" ] },
+    { t: "بانيني|Panini|Panini", i: [
+      "Panini dinde|بانيني ديك رومي|Turkey panini|25",
+      "Panini viande hachée|بانيني لحم مفروم|Minced meat panini|28",
+      "Panini charcuterie|بانيني لحوم باردة|Deli meats panini|25",
+      "Panini mixte|بانيني مشكل|Mixed panini|30",
+      "Panini 4 fromages|بانيني 4 أجبان|4-cheese panini|25",
+      "Panini thon|بانيني تونة|Tuna panini|25",
+      "Panini fruits de mer|بانيني مأكولات بحرية|Seafood panini|38",
+      "Panini Borj|بانيني البرج|Borj panini|35" ] },
+    { t: "برغر|Burgers|Burgers", i: [
+      "Burger simple|برغر عادي|Classic burger|22",
+      "Cheese burger|تشيز برغر|Cheeseburger|26",
+      "Egg burger|برغر بالبيض||30",
+      "Big burger|بيغ برغر||35",
+      "Chicken burger|تشيكن برغر||26",
+      "Big chicken|بيغ تشيكن||35",
+      "Burger Borj|برغر البرج|Borj burger|38" ] },
+    { t: "وجبة الأطفال|Menu enfants|Kids menu", i: [
+      "Chicken burger + jus + surprise|تشيكن برغر + عصير + مفاجأة|Chicken burger + juice + surprise|38",
+      "Burger simple + jus + surprise|برغر عادي + عصير + مفاجأة|Classic burger + juice + surprise|38",
+      "Nuggets + jus + surprise|ناغتس + عصير + مفاجأة|Nuggets + juice + surprise|38" ] },
+    { t: "المعجنات|Les pâtes|Pasta", i: [
+      "Lasagne bolognaise|لازانيا بولونيز|Bolognese lasagna|38",
+      "Lasagne fruits de mer|لازانيا مأكولات بحرية|Seafood lasagna|50",
+      "Pastichio fumé|باستيتشيو مدخن|Smoked pastichio|32",
+      "Pastichio poulet|باستيتشيو دجاج|Chicken pastichio|38",
+      "Pastichio bolognaise|باستيتشيو بولونيز|Bolognese pastichio|38",
+      "Pastichio mixte|باستيتشيو مشكل|Mixed pastichio|42",
+      "Supplément sauce|إضافة صلصة|Extra sauce|2" ] },
+    { t: "سلطات|Salades|Salads", i: [
+      "Salade niçoise|سلطة نيسواز|Niçoise salad|25",
+      "Salade Borj|سلطة البرج|Borj salad|38",
+      "Salade pescador|سلطة بيسكادور|Pescador salad|47",
+      "Salade spéciale|سلطة سبيسيال|Special salad|58",
+      "Salade familiale|سلطة عائلية|Family salad|80" ] },
+    { t: "تاكوس (غراتيني: +5 درهم)|Tacos (gratiné : +5 DH)|Tacos (gratin: +5 DH)", i: [
+      "Tacos dinde|تاكوس ديك رومي|Turkey tacos|35",
+      "Tacos viande hachée|تاكوس لحم مفروم|Minced meat tacos|37",
+      "Tacos chawarma|تاكوس شاورما|Shawarma tacos|37",
+      "Tacos nuggets|تاكوس ناغتس|Nuggets tacos|38",
+      "Tacos mixte|تاكوس مشكل|Mixed tacos|40",
+      "Tacos Borj|تاكوس البرج|Borj tacos|40",
+      "Tacos cordon-bleu|تاكوس كوردون بلو|Cordon bleu tacos|42",
+      "Tacos fruits de mer|تاكوس مأكولات بحرية|Seafood tacos|50",
+      "Nuggets 10 pièces|ناغتس 10 قطع|Nuggets (10 pieces)|30",
+      "Plat de frites|طبق بطاطس مقلية|Plate of fries|12" ] },
+    { t: "ساندويتش رويال|Sandwich Royal|Royal Sandwich", i: [
+      "Royal dinde Crespi|رويال ديك رومي كريسبي|Royal crispy turkey|38",
+      "Royal viande hachée|رويال لحم مفروم|Royal minced meat|35",
+      "Royal mixte|رويال مشكل|Royal mixed|42",
+      "Royal cordon-bleu|رويال كوردون بلو|Royal cordon bleu|40" ] },
+    { t: "بيتزا (صغيرة / كبيرة)|Pizza (P / G)|Pizza (S / L)", i: [
+      "Pizza fruits de mer|بيتزا مأكولات بحرية|Seafood pizza|48 / 60",
+      "Pizza dinde|بيتزا ديك رومي|Turkey pizza|35 / 60",
+      "Pizza viande hachée|بيتزا لحم مفروم|Minced meat pizza|37 / 60",
+      "Pizza hawaïenne|بيتزا هاواي|Hawaiian pizza|38 / 60",
+      "Pizza 4 saisons|بيتزا 4 فصول|4 Seasons pizza|40 / 60",
+      "Pizza 4 fromages|بيتزا 4 أجبان|4 Cheese pizza|30 / 50",
+      "Pizza margarita|بيتزا مارغريتا|Margherita pizza|28 / 48",
+      "Pizza charcuterie|بيتزا لحوم باردة|Deli meats pizza|35 / 57",
+      "Pizza végétarienne|بيتزا نباتية|Vegetarian pizza|34 / 53",
+      "Pizza thon|بيتزا تونة|Tuna pizza|34 / 53",
+      "Pizza Borj|بيتزا البرج|Borj pizza|40 / 60",
+      "Pizza au choix|بيتزا حسب الاختيار|Pizza of your choice|42 / 60" ] },
+    { t: "كسكس (كل جمعة)|Couscous (chaque vendredi)|Couscous (every Friday)", i: [
+      "Couscous poulet|كسكس دجاج|Chicken couscous|35",
+      "Couscous viande|كسكس لحم|Meat couscous|42" ] },
+    { t: "حلويات|Desserts|Desserts", i: [
+      "Tiramisu oreo|تيراميسو أوريو|Oreo tiramisu|20",
+      "Tiramisu KitKat|تيراميسو كيت كات|KitKat tiramisu|20",
+      "Pana cotta|بانا كوتا|Panna cotta|15" ] }
+  ]
+};
 
-  <noscript>
-    <p class="empty">فعّلي JavaScript فالمتصفح باش يبان المينو.</p>
-  </noscript>
+/* ============================================================
+   ⚙️  المحرك: ما تمسيهش
+   ============================================================ */
+const UI = {
+  ar: { book: "احجز طاولة", map: "كيفاش توصل", hours: "أوقات العمل", address: "العنوان", phone: "الهاتف", dh: "درهم" },
+  fr: { book: "Réserver une table", map: "Itinéraire", hours: "Horaires", address: "Adresse", phone: "Téléphone", dh: "DH" },
+  en: { book: "Book a table", map: "Get directions", hours: "Opening hours", address: "Address", phone: "Phone", dh: "DH" }
+};
+const NAV = { ar: "أقسام المنيو", fr: "Catégories du menu", en: "Menu categories" };
+const $ = id => document.getElementById(id);
+const C = CONFIG, rs = document.documentElement.style;
+let LANG = "ar";
 
-  <footer>Café El Borj · مقهى البرج</footer>
+// الرسوم مدمجة فالملف (ما خاصكش ترفعي ملفات أخرى)
+const BG = '<rect width="280" height="170" rx="16" fill="#cfe3f5"/><circle cx="140" cy="88" r="62" fill="#fff" opacity=".55"/><ellipse cx="140" cy="146" rx="70" ry="8" fill="#16324f" opacity=".12"/>';
+const ILL = {
+  1: '<path d="M40 112Q52 62 100 58Q148 62 160 112Q142 98 128 103Q116 88 100 90Q84 88 72 103Q58 98 40 112Z" fill="#d9903d" stroke="#a9651f" stroke-width="3"/><path d="M76 68L84 94M100 62L100 90M124 68L116 94" stroke="#a9651f" stroke-width="3" fill="none"/><rect x="190" y="78" width="38" height="56" rx="7" fill="#f2a65a" stroke="#16324f" stroke-width="3"/><rect x="193" y="81" width="32" height="12" rx="5" fill="#fff" opacity=".45"/>',
+  2: '<path d="M105 62L175 62L168 135Q140 142 112 135Z" fill="#8b5a2b"/><rect x="100" y="52" width="80" height="12" rx="5" fill="#16324f"/><rect x="146" y="20" width="7" height="34" fill="#e4572e" transform="rotate(12 150 40)"/><path d="M140 78L146 91L160 93L150 103L153 117L140 110L127 117L130 103L120 93L134 91Z" fill="#f6c744"/>',
+  3: '<path d="M110 70L170 70L162 138Q140 144 118 138Z" fill="#f4b6c2" stroke="#16324f" stroke-width="3"/><ellipse cx="140" cy="64" rx="34" ry="14" fill="#fff"/><ellipse cx="140" cy="52" rx="22" ry="12" fill="#fff"/><circle cx="140" cy="40" r="8" fill="#d7263d"/><rect x="152" y="18" width="6" height="62" fill="#16324f" transform="rotate(14 155 50)"/>',
+  4: '<rect x="108" y="48" width="64" height="92" rx="8" fill="#e8f7e4" stroke="#16324f" stroke-width="3"/><rect x="111" y="70" width="58" height="67" rx="6" fill="#9be08f"/><ellipse cx="130" cy="46" rx="14" ry="7" fill="#3fa34d" transform="rotate(-30 130 46)"/><ellipse cx="152" cy="44" rx="14" ry="7" fill="#2f8a3d" transform="rotate(25 152 44)"/><circle cx="174" cy="62" r="14" fill="#9ccc3a" stroke="#4c8a1d" stroke-width="3"/><rect x="120" y="92" width="18" height="18" rx="3" fill="#fff" opacity=".6"/><rect x="142" y="106" width="18" height="18" rx="3" fill="#fff" opacity=".6"/>',
+  5: '<path d="M112 48Q140 40 168 48Q164 86 148 100L148 128L166 138L114 138L132 128L132 100Q116 86 112 48Z" fill="#f2a65a" stroke="#16324f" stroke-width="3"/><path d="M114 56Q140 48 166 56Q165 66 162 74Q140 66 118 74Q115 66 114 56Z" fill="#e4572e" opacity=".8"/><path d="M160 34Q180 22 198 38Z" fill="#e4572e"/><path d="M178 30L170 72" stroke="#16324f" stroke-width="3"/><circle cx="114" cy="52" r="13" fill="#f6c744" stroke="#e08a00" stroke-width="3"/>',
+  6: '<path d="M106 62L174 62L166 138Q140 146 114 138Z" fill="#f3d9c0" stroke="#16324f" stroke-width="3"/><rect x="102" y="52" width="76" height="12" rx="5" fill="#16324f"/><rect x="146" y="14" width="10" height="48" fill="#f06292" transform="rotate(10 150 40)"/><g fill="#3b2a24"><circle cx="124" cy="126" r="6"/><circle cx="138" cy="130" r="6"/><circle cx="152" cy="126" r="6"/><circle cx="131" cy="116" r="6"/><circle cx="147" cy="115" r="6"/><circle cx="162" cy="128" r="6"/></g>',
+  7: '<path d="M110 70L170 70L164 138Q140 144 116 138Z" fill="#c68b59" stroke="#16324f" stroke-width="3"/><path d="M114 70Q140 18 166 70Z" fill="#fff" stroke="#e6d5c3" stroke-width="2"/><path d="M120 62Q135 48 140 60Q148 44 160 62" stroke="#c0661c" stroke-width="4" fill="none"/><rect x="152" y="12" width="6" height="54" fill="#e4572e" transform="rotate(10 155 40)"/>',
+  8: '<path d="M110 58L170 58L164 138Q140 144 116 138Z" fill="#f28fa3" stroke="#16324f" stroke-width="3"/><path d="M111 58L169 58L168 74L112 74Z" fill="#f6c744"/><path d="M180 50Q198 50 194 70Q188 86 180 90Q172 86 166 70Q162 50 180 50Z" fill="#e4572e"/><path d="M170 52L180 44L190 52L180 56Z" fill="#3fa34d"/><rect x="128" y="24" width="6" height="50" fill="#16324f" transform="rotate(-12 131 50)"/>',
+  9: '<ellipse cx="140" cy="128" rx="62" ry="14" fill="#c98a43"/><rect x="78" y="110" width="124" height="18" fill="#e0a85b"/><ellipse cx="140" cy="110" rx="62" ry="14" fill="#f0c27a"/><rect x="78" y="92" width="124" height="18" fill="#e0a85b"/><ellipse cx="140" cy="92" rx="62" ry="14" fill="#f0c27a"/><rect x="78" y="74" width="124" height="18" fill="#e0a85b"/><ellipse cx="140" cy="74" rx="62" ry="14" fill="#f6cf8e"/><rect x="126" y="62" width="28" height="12" rx="2" fill="#ffe27a"/><path d="M90 74Q140 94 190 74L190 82Q184 96 178 82Q172 104 164 82Q140 96 100 84Q96 98 92 84Z" fill="#8b3d0e"/>',
+  10: '<rect x="70" y="60" width="140" height="56" rx="26" fill="#e9b872" stroke="#a9651f" stroke-width="3"/><path d="M100 66L92 110M126 62L118 114M152 62L144 114M178 66L170 110" stroke="#a9651f" stroke-width="5" opacity=".6"/><path d="M90 116Q100 142 112 116Z" fill="#f6c744"/><path d="M170 116Q182 136 192 116Z" fill="#f6c744"/>',
+  11: '<path d="M84 76Q84 32 140 32Q196 32 196 76Z" fill="#e0a043"/><g fill="#fff3d6"><ellipse cx="120" cy="52" rx="4" ry="2"/><ellipse cx="144" cy="46" rx="4" ry="2"/><ellipse cx="164" cy="58" rx="4" ry="2"/></g><path d="M80 80Q95 92 110 80Q125 92 140 80Q155 92 170 80Q185 92 200 80L200 86L80 86Z" fill="#6cc04a"/><rect x="84" y="86" width="112" height="9" rx="4" fill="#e4572e"/><rect x="82" y="95" width="116" height="16" rx="8" fill="#6b3a1e"/><path d="M84 114L196 114Q196 132 176 132L104 132Q84 132 84 114Z" fill="#e0a043"/>',
+  12: '<rect x="96" y="70" width="88" height="62" rx="6" fill="#e4572e"/><rect x="132" y="70" width="16" height="62" fill="#f6c744"/><rect x="92" y="58" width="96" height="18" rx="5" fill="#ef6a3f"/><rect x="132" y="58" width="16" height="18" fill="#f6c744"/><path d="M140 58Q118 28 112 52Q120 62 140 58Z" fill="#f6c744"/><path d="M140 58Q162 28 168 52Q160 62 140 58Z" fill="#f6c744"/>',
+  13: '<ellipse cx="140" cy="112" rx="78" ry="26" fill="#fff" stroke="#16324f" stroke-width="3"/><ellipse cx="140" cy="104" rx="52" ry="18" fill="#f6d27a"/><path d="M100 104Q140 84 180 104M108 112Q140 96 172 112M120 98Q140 90 160 98" stroke="#d9a93a" stroke-width="3" fill="none"/><ellipse cx="140" cy="94" rx="26" ry="9" fill="#e4572e"/><ellipse cx="132" cy="88" rx="7" ry="4" fill="#3fa34d" transform="rotate(-30 132 88)"/>',
+  14: '<path d="M76 84L204 84Q200 134 140 138Q80 134 76 84Z" fill="#fff" stroke="#16324f" stroke-width="3"/><circle cx="106" cy="76" r="16" fill="#6cc04a"/><circle cx="132" cy="68" r="18" fill="#4fa83d"/><circle cx="160" cy="70" r="17" fill="#6cc04a"/><circle cx="184" cy="78" r="14" fill="#4fa83d"/><circle cx="120" cy="64" r="8" fill="#e4572e"/><circle cx="170" cy="60" r="8" fill="#e4572e"/><circle cx="146" cy="58" r="7" fill="#b7e08a" stroke="#4c8a1d" stroke-width="2"/>',
+  15: '<path d="M64 118Q64 54 140 54Q216 54 216 118Z" fill="#f0b955" stroke="#a9651f" stroke-width="3"/><path d="M80 80Q96 68 110 82Q124 66 140 80Q156 66 170 82Q184 68 200 80L200 92L80 92Z" fill="#6cc04a"/><g fill="#e4572e"><circle cx="110" cy="98" r="6"/><circle cx="140" cy="94" r="6"/><circle cx="170" cy="98" r="6"/></g>',
+  16: '<path d="M52 82Q52 54 140 54Q228 54 228 82Z" fill="#e0a043"/><path d="M50 86Q70 98 90 86Q110 98 130 86Q150 98 170 86Q190 98 210 86Q220 98 230 86L230 90L50 90Z" fill="#6cc04a"/><rect x="52" y="90" width="176" height="10" rx="5" fill="#d9695f"/><rect x="56" y="100" width="168" height="7" fill="#f6c744"/><path d="M52 108L228 108Q228 128 208 128L72 128Q52 128 52 108Z" fill="#e0a043"/>',
+  17: '<circle cx="140" cy="88" r="58" fill="#e8a94c" stroke="#a9651f" stroke-width="4"/><circle cx="140" cy="88" r="48" fill="#f6c744"/><path d="M140 40L140 136M92 88L188 88M106 54L174 122M174 54L106 122" stroke="#d98e12" stroke-width="2"/><g fill="#d7263d"><circle cx="122" cy="68" r="8"/><circle cx="158" cy="74" r="8"/><circle cx="126" cy="106" r="8"/><circle cx="160" cy="108" r="8"/><circle cx="140" cy="90" r="7"/></g><circle cx="108" cy="90" r="4" fill="#3fa34d"/>',
+  18: '<path d="M66 100L214 100Q210 140 140 142Q70 140 66 100Z" fill="#c8693a" stroke="#16324f" stroke-width="3"/><path d="M76 100Q80 52 140 50Q200 52 204 100Z" fill="#f6d27a"/><g fill="#e0b24a"><circle cx="100" cy="86" r="3"/><circle cx="118" cy="94" r="3"/><circle cx="162" cy="92" r="3"/><circle cx="182" cy="84" r="3"/><circle cx="140" cy="76" r="3"/></g><rect x="108" y="66" width="24" height="9" rx="4" fill="#f08a24" transform="rotate(-20 120 70)"/><circle cx="160" cy="74" r="9" fill="#9ccc3a" stroke="#4c8a1d" stroke-width="2"/><circle cx="140" cy="60" r="5" fill="#e8c46a"/>',
+  19: '<path d="M108 58L172 58L166 134Q140 142 114 134Z" fill="#fff8ee" stroke="#16324f" stroke-width="3"/><rect x="112" y="76" width="56" height="12" fill="#8b5a2b"/><rect x="113" y="102" width="54" height="12" fill="#8b5a2b"/><path d="M108 58L172 58L171 68L109 68Z" fill="#5a3418"/><rect x="178" y="28" width="5" height="62" rx="2" fill="#16324f" transform="rotate(20 180 60)"/>'
+};
+const illUri = n => "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 170">' + BG + ILL[n] + "</svg>");
 
-  <script>
-    "use strict";
+rs.setProperty("--navy", C.colors.main);
+rs.setProperty("--sky", C.colors.soft);
+rs.setProperty("--sun", C.colors.accent);
+$("latin").textContent = C.latin;
+$("book").href = "https://wa.me/" + C.whatsapp;
+if (C.map) { $("mapbtn").href = C.map; $("mapbtn").hidden = false; }
+$("social").innerHTML = [["Instagram", C.instagram], ["Facebook", C.facebook]]
+  .filter(x => x[1]).map(([n, u]) => '<a href="' + u + '" target="_blank" rel="noopener">' + n + "</a>").join("");
+$("lang").innerHTML = [["ar", "العربية"], ["fr", "Français"], ["en", "English"]]
+  .map(([l, n]) => '<button data-l="' + l + '">' + n + "</button>").join("");
+$("lang").onclick = e => { const l = e.target.dataset.l; if (l) { LANG = l; render(); } };
 
-    /*
-      تعديل المينو:
-      ar = الاسم بالعربية
-      fr = الاسم بالفرنسية
-      price = الثمن بالدرهم، مثلاً 25 عوض null
-      image = اسم الصورة بلا امتداد
+// كيقلب على الصورة بأي امتداد
+const EXTS = [".svg", ".jpg", ".jpeg", ".png", ".webp", ".jfif", ".avif", ".jpg.jpg", ".jpg.jpeg", ".jpg.png", ".jpg.webp", ".jpg.jfif", ".jpg.avif"];
+function loadImg(img, base, ok) {
+  let k = 0;
+  img.onload = () => ok && ok();
+  img.onerror = () => { k++; if (k < EXTS.length) img.src = base + EXTS[k]; else (img.closest(".thumb") || img).remove(); };
+  img.src = base + EXTS[0];
+}
+loadImg($("cover"), "cafe-photo", () => { $("cover").hidden = false; });
 
-      الأسماء العامة أسفله أمثلة قابلة للتعديل.
-      الأثمنة فارغة إلى حين إدخال الأثمنة الحقيقية.
-    */
-
-    const MENU = [
-      {
-        id: "01",
-        title: "الفطور",
-        icon: "🍳",
-        items: [
-          {
-            ar: "الفطور",
-            fr: "Petit-déjeuner",
-            price: null,
-            image: "menu-01-01"
-          }
-        ]
-      },
-      {
-        id: "02",
-        title: "الأكثر طلباً",
-        icon: "⭐",
-        items: [
-          {
-            ar: "اختيار البرج",
-            fr: "Sélection El Borj",
-            price: null,
-            image: "menu-02-01"
-          }
-        ]
-      },
-      {
-        id: "03",
-        title: "ميلك شيك",
-        icon: "🥤",
-        items: [
-          {
-            ar: "ميلك شيك",
-            fr: "Milkshake",
-            price: null,
-            image: "menu-03-01"
-          }
-        ]
-      },
-      {
-        id: "04",
-        title: "موهيتو",
-        icon: "🍋",
-        items: [
-          {
-            ar: "موهيتو",
-            fr: "Mojito",
-            price: null,
-            image: "menu-04-01"
-          }
-        ]
-      },
-      {
-        id: "05",
-        title: "كوكتيل",
-        icon: "🍹",
-        items: [
-          {
-            ar: "كوكتيل",
-            fr: "Cocktail",
-            price: null,
-            image: "menu-05-01"
-          }
-        ]
-      },
-      {
-        id: "06",
-        title: "بابل تي",
-        icon: "🧋",
-        items: [
-          {
-            ar: "بابل تي",
-            fr: "Bubble tea",
-            price: null,
-            image: "menu-06-01"
-          }
-        ]
-      },
-      {
-        id: "07",
-        title: "فرابوتشينو",
-        icon: "🧊",
-        items: [
-          {
-            ar: "فرابوتشينو",
-            fr: "Frappuccino",
-            price: null,
-            image: "menu-07-01"
-          }
-        ]
-      },
-      {
-        id: "08",
-        title: "سموذي",
-        icon: "🍓",
-        items: [
-          {
-            ar: "سموذي",
-            fr: "Smoothie",
-            price: null,
-            image: "menu-08-01"
-          }
-        ]
-      },
-      {
-        id: "09",
-        title: "بانكيك",
-        icon: "🥞",
-        items: [
-          {
-            ar: "بانكيك",
-            fr: "Pancakes",
-            price: null,
-            image: "menu-09-01"
-          }
-        ]
-      },
-      {
-        id: "10",
-        title: "بانيني",
-        icon: "🥪",
-        items: [
-          {
-            ar: "بانيني",
-            fr: "Panini",
-            price: null,
-            image: "menu-10-01"
-          }
-        ]
-      },
-      {
-        id: "11",
-        title: "برغر",
-        icon: "🍔",
-        items: [
-          {
-            ar: "برغر عادي",
-            fr: "Burger classique",
-            price: null,
-            image: "menu-11-01"
-          },
-          {
-            ar: "تشيز برغر",
-            fr: "Cheeseburger",
-            price: null,
-            image: "menu-11-02"
-          },
-          {
-            ar: "برغر بالبيض",
-            fr: "Burger aux œufs",
-            price: null,
-            image: "menu-11-03"
-          },
-          {
-            ar: "بيغ برغر",
-            fr: "Big burger",
-            price: null,
-            image: "menu-11-04"
-          },
-          {
-            ar: "تشيكن برغر",
-            fr: "Chicken burger",
-            price: null,
-            image: "menu-11-05"
-          },
-          {
-            ar: "بيغ تشيكن",
-            fr: "Big chicken",
-            price: null,
-            image: "menu-11-06"
-          },
-          {
-            ar: "برغر البرج",
-            fr: "Burger El Borj",
-            price: null,
-            image: "menu-11-07"
-          }
-        ]
-      },
-      {
-        id: "12",
-        title: "وجبة الأطفال",
-        icon: "🍟",
-        items: [
-          {
-            ar: "وجبة الأطفال",
-            fr: "Menu enfant",
-            price: null,
-            image: "menu-12-01"
-          }
-        ]
-      },
-      {
-        id: "13",
-        title: "المعجنات",
-        icon: "🍝",
-        items: [
-          {
-            ar: "المعجنات",
-            fr: "Pâtes",
-            price: null,
-            image: "menu-13-01"
-          }
-        ]
-      },
-      {
-        id: "14",
-        title: "السلطات",
-        icon: "🥗",
-        items: [
-          {
-            ar: "سلطة",
-            fr: "Salade",
-            price: null,
-            image: "menu-14-01"
-          }
-        ]
-      },
-      {
-        id: "15",
-        title: "تاكوس",
-        icon: "🌯",
-        items: [
-          {
-            ar: "تاكوس",
-            fr: "Tacos",
-            price: null,
-            image: "menu-15-01"
-          }
-        ]
-      },
-      {
-        id: "16",
-        title: "ساندويتش رويال",
-        icon: "🥖",
-        items: [
-          {
-            ar: "ساندويتش رويال",
-            fr: "Sandwich royal",
-            price: null,
-            image: "menu-16-01"
-          }
-        ]
-      },
-      {
-        id: "17",
-        title: "بيتزا",
-        icon: "🍕",
-        items: [
-          {
-            ar: "بيتزا",
-            fr: "Pizza",
-            price: null,
-            image: "menu-17-01"
-          }
-        ]
-      },
-      {
-        id: "18",
-        title: "كسكس",
-        icon: "🍲",
-        items: [
-          {
-            ar: "كسكس",
-            fr: "Couscous",
-            price: null,
-            image: "menu-18-01"
-          }
-        ]
-      },
-      {
-        id: "19",
-        title: "حلويات",
-        icon: "🍰",
-        items: [
-          {
-            ar: "تيراميسو",
-            fr: "Tiramisu",
-            price: null,
-            image: "menu-19-01"
-          }
-        ]
-      }
-    ];
-
-    const menuElement = document.getElementById("menu");
-    const categoriesElement = document.getElementById("categories");
-    const searchElement = document.getElementById("search");
-
-    let activeCategory = "all";
-
-    function normalize(text) {
-      return String(text)
-        .toLocaleLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[\u064B-\u065F]/g, "")
-        .replace(/[أإآ]/g, "ا")
-        .replace(/ى/g, "ي")
-        .trim();
-    }
-
-    function renderCategories() {
-      categoriesElement.replaceChildren();
-
-      const categories = [
-        { id: "all", title: "جميع الأقسام" },
-        ...MENU
-      ];
-
-      categories.forEach(function (category) {
-        const button = document.createElement("button");
-        const selected = category.id === activeCategory;
-
-        button.type = "button";
-        button.textContent = category.title;
-        button.classList.toggle("active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-
-        button.addEventListener("click", function () {
-          activeCategory = category.id;
-          renderCategories();
-          renderMenu();
-        });
-
-        categoriesElement.appendChild(button);
-      });
-    }
-
-    function makePhoto(item, icon) {
-      const box = document.createElement("div");
-      box.className = "photo";
-
-      const fallback = document.createElement("span");
-      fallback.textContent = icon;
-      fallback.setAttribute("aria-hidden", "true");
-      box.appendChild(fallback);
-
-      if (!item.image) {
-        return box;
-      }
-
-      const image = document.createElement("img");
-      const extensions = ["jpg", "jpeg", "png", "webp"];
-      let extensionIndex = 0;
-
-      image.alt = item.ar;
-      image.loading = "lazy";
-      image.decoding = "async";
-
-      image.addEventListener("load", function () {
-        box.replaceChildren(image);
-      });
-
-      image.addEventListener("error", function () {
-        extensionIndex += 1;
-
-        if (extensionIndex < extensions.length) {
-          image.src = "./" + item.image + "." + extensions[extensionIndex];
-        }
-      });
-
-      image.src = "./" + item.image + "." + extensions[extensionIndex];
-
-      return box;
-    }
-
-    function makeCard(item, icon) {
-      const card = document.createElement("article");
-      card.className = "card";
-      card.appendChild(makePhoto(item, icon));
-
-      const body = document.createElement("div");
-      body.className = "card-body";
-
-      const title = document.createElement("h3");
-      title.textContent = item.ar;
-      body.appendChild(title);
-
-      if (item.fr) {
-        const french = document.createElement("p");
-        french.className = "french";
-        french.lang = "fr";
-        french.dir = "ltr";
-        french.textContent = item.fr;
-        body.appendChild(french);
-      }
-
-      if (
-        item.price !== null &&
-        item.price !== undefined &&
-        item.price !== ""
-      ) {
-        const price = document.createElement("p");
-        price.className = "price";
-        price.textContent = item.price + " درهم";
-        body.appendChild(price);
-      }
-
-      card.appendChild(body);
-      return card;
-    }
-
-    function renderMenu() {
-      menuElement.replaceChildren();
-
-      const query = normalize(searchElement.value);
-      let count = 0;
-
-      MENU.forEach(function (category) {
-        if (
-          activeCategory !== "all" &&
-          category.id !== activeCategory
-        ) {
-          return;
-        }
-
-        const items = category.items.filter(function (item) {
-          const text = [
-            category.title,
-            item.ar,
-            item.fr || ""
-          ].join(" ");
-
-          return normalize(text).includes(query);
-        });
-
-        if (items.length === 0) {
-          return;
-        }
-
-        const section = document.createElement("section");
-        const heading = document.createElement("h2");
-
-        heading.className = "section-title";
-        heading.textContent = category.icon + " " + category.title;
-        section.appendChild(heading);
-
-        const grid = document.createElement("div");
-        grid.className = "grid";
-
-        items.forEach(function (item) {
-          grid.appendChild(makeCard(item, category.icon));
-          count += 1;
-        });
-
-        section.appendChild(grid);
-        menuElement.appendChild(section);
-      });
-
-      if (count === 0) {
-        const message = document.createElement("p");
-        message.className = "empty";
-        message.textContent = "ما لقينا حتى نتيجة لهاد البحث.";
-        menuElement.appendChild(message);
-      }
-    }
-
-    searchElement.addEventListener("input", renderMenu);
-
-    renderCategories();
-    renderMenu();
-  </script>
+function render() {
+  const U = UI[LANG], d = document.documentElement;
+  d.lang = LANG; d.dir = LANG === "ar" ? "rtl" : "ltr";
+  document.title = C.name[LANG];
+  $("name").textContent = C.name[LANG];
+  $("tagline").textContent = C.tagline[LANG];
+  $("footer").textContent = C.footer[LANG];
+  $("book").textContent = U.book;
+  $("mapbtn").textContent = U.map;
+  $("chips").innerHTML = C.services[LANG].map(x => "<span>" + x + "</span>").join("");
+  $("info").innerHTML = "<p><b>" + U.hours + ":</b> " + C.hours[LANG] + "</p><p><b>" + U.address + ":</b> " +
+    C.address + "</p><p><b>" + U.phone + ":</b> " + C.phone + "</p>";
+  document.querySelectorAll("#lang button").forEach(b => b.classList.toggle("on", b.dataset.l === LANG));
+  const title = s => { const [a, f, e] = s.t.split("|"); return { ar: a, fr: f, en: e || f }[LANG]; };
+  $("menu-nav").setAttribute("aria-label", NAV[LANG]);
+  $("menu-nav").innerHTML = C.menu.map((s, i) => '<a href="#cat-' + i + '">' + title(s) + "</a>").join("");
+  $("menu").innerHTML = C.menu.map((s, idx) => {
+    const banner = s.img ? '<img class="sec" data-base="' + s.img + '" alt="">'
+      : ILL[idx + 1] ? '<img class="sec" src="' + illUri(idx + 1) + '" alt="">' : "";
+    return '<section id="cat-' + idx + '"><h2>' + title(s) + "</h2>" + banner + s.i.map(row => {
+      const [fr, ar, en, p, img] = row.split("|"), name = { fr: fr, ar: ar || fr, en: en || fr }[LANG];
+      return '<div class="item">' + (img ? '<div class="thumb"><img data-base="' + img + '" alt="' + name + '"></div>' : "") +
+        "<span>" + name + "</span><i></i><b>" + p + " " + U.dh + "</b></div>";
+    }).join("") + "</section>";
+  }).join("");
+  document.querySelectorAll("img[data-base]").forEach(im => loadImg(im, im.dataset.base));
+}
+render();
+</script>
 </body>
 </html>
